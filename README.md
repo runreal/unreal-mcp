@@ -1,5 +1,5 @@
 # unreal-mcp
-> MCP server for Unreal Engine that uses Unreal Remote Execution
+> MCP server for Unreal Engine that uses Unreal Python Remote Execution
 
 ## Differences
 

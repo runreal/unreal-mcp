@@ -1,7 +1,7 @@
 {
   "name": "@runreal/unreal-mcp",
   "version": "0.1.0",
-  "description": "",
+  "description": "MCP server for Unreal Engine using Unreal Python Remote Execution",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -9,8 +9,16 @@
     "build": "tsc --build && cp -r server/scripts dist/scripts",
     "start": "node dist/index.js"
   },
-  "keywords": [],
-  "author": "",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "unreal",
+    "mcp",
+    "modelcontextprotocol",
+    "unreal-mcp"
+  ],
+  "author": "RUNREAL runreal.dev",
   "license": "MIT",
   "packageManager": "pnpm@10.11.0",
   "dependencies": {
