@@ -1,19 +1,30 @@
 import unreal
 import json
 
-asset_registry = unreal.AssetRegistryHelpers.get_asset_registry()
 
-asset_data = asset_registry.get_asset_by_object_path("${asset_path}")
+def get_asset_references(asset_path):
+    asset_registry = unreal.AssetRegistryHelpers.get_asset_registry()
 
-referencing_assets = asset_registry.get_referencers(
-    asset_data.package_name, unreal.AssetRegistryDependencyOptions()
-)
+    asset_data = asset_registry.get_asset_by_object_path(asset_path)
 
-asset_paths = []
-for referencer in referencing_assets:
-    assets = asset_registry.get_assets_by_package_name(referencer)
-    for asset in assets:
-        [asset_class, asset_name] = asset.get_full_name().split(" ", 1)
-        asset_paths.append({"name": asset_name, "class": asset_class})
+    referencing_assets = asset_registry.get_referencers(
+        asset_data.package_name, unreal.AssetRegistryDependencyOptions()
+    )
 
-print(json.dumps(asset_paths))
+    asset_paths = []
+    for referencer in referencing_assets:
+        assets = asset_registry.get_assets_by_package_name(referencer)
+        for asset in assets:
+            [asset_class, asset_name] = asset.get_full_name().split(" ", 1)
+            asset_paths.append({"name": asset_name, "class": asset_class})
+
+    return asset_paths
+
+
+def main():
+    references = get_asset_references("${asset_path}")
+    print(json.dumps(references))
+
+
+if __name__ == "__main__":
+    main()

@@ -36,6 +36,31 @@ export const UE_CONSOLE_COMMAND = fs.readFileSync(
   "utf8",
 );
 
+export const UE_GET_PROJECT_INFO = fs.readFileSync(
+  path.join(__dirname, "./scripts/ue_get_project_info.py"),
+  "utf8",
+);
+
+export const UE_GET_MAP_INFO = fs.readFileSync(
+  path.join(__dirname, "./scripts/ue_get_map_info.py"),
+  "utf8",
+);
+
+export const UE_SEARCH_ASSETS = fs.readFileSync(
+  path.join(__dirname, "./scripts/ue_search_assets.py"),
+  "utf8",
+);
+
+export const UE_GET_WORLD_OUTLINER = fs.readFileSync(
+  path.join(__dirname, "./scripts/ue_get_world_outliner.py"),
+  "utf8",
+);
+
+export const UE_VALIDATE_ASSETS = fs.readFileSync(
+  path.join(__dirname, "./scripts/ue_validate_assets.py"),
+  "utf8",
+);
+
 export const UEGetAssetInfo = (asset_path: string) =>
   Template(UE_GET_ASSET_INFO, { asset_path });
 
@@ -49,3 +74,15 @@ export const UEGetAssetReferences = (asset_path: string) =>
 
 export const UEConsoleCommand = (command: string) =>
   Template(UE_CONSOLE_COMMAND, { command });
+
+export const UEGetProjectInfo = () => Template(UE_GET_PROJECT_INFO);
+
+export const UEGetMapInfo = () => Template(UE_GET_MAP_INFO);
+
+export const UESearchAssets = (search_term: string, asset_class?: string) =>
+  Template(UE_SEARCH_ASSETS, { search_term, asset_class: asset_class || "" });
+
+export const UEGetWorldOutliner = () => Template(UE_GET_WORLD_OUTLINER);
+
+export const UEValidateAssets = (asset_paths?: string) =>
+  Template(UE_VALIDATE_ASSETS, { asset_paths: asset_paths || "" });

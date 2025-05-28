@@ -154,5 +154,97 @@ server.tool(
   },
 );
 
+server.tool(
+  "project_info",
+  "Get detailed information about the current project",
+  {},
+  async () => {
+    const result = await tryRunCommand(tools.UEGetProjectInfo());
+    return {
+      content: [
+        {
+          type: "text",
+          text: result,
+        },
+      ],
+    };
+  },
+);
+
+server.tool(
+  "get_map_info",
+  "Get detailed information about the current map/level",
+  {},
+  async () => {
+    const result = await tryRunCommand(tools.UEGetMapInfo());
+    return {
+      content: [
+        {
+          type: "text",
+          text: result,
+        },
+      ],
+    };
+  },
+);
+
+server.tool(
+  "search_assets",
+  "Search for assets by name or path with optional class filter",
+  {
+    search_term: z.string(),
+    asset_class: z.string().optional(),
+  },
+  async ({ search_term, asset_class }) => {
+    const result = await tryRunCommand(
+      tools.UESearchAssets(search_term, asset_class),
+    );
+    return {
+      content: [
+        {
+          type: "text",
+          text: result,
+        },
+      ],
+    };
+  },
+);
+
+server.tool(
+  "get_world_outliner",
+  "Get all actors in the current world with their properties",
+  {},
+  async () => {
+    const result = await tryRunCommand(tools.UEGetWorldOutliner());
+    return {
+      content: [
+        {
+          type: "text",
+          text: result,
+        },
+      ],
+    };
+  },
+);
+
+server.tool(
+  "validate_assets",
+  "Validate assets in the project to check for errors",
+  {
+    asset_paths: z.string().optional(),
+  },
+  async ({ asset_paths }) => {
+    const result = await tryRunCommand(tools.UEValidateAssets(asset_paths));
+    return {
+      content: [
+        {
+          type: "text",
+          text: result,
+        },
+      ],
+    };
+  },
+);
+
 const transport = new StdioServerTransport();
 await server.connect(transport);

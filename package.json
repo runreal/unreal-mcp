@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx --watch server/index.ts",
-    "build": "tsc --build && cp -r server/scripts dist/scripts",
+    "build": "tsc --build && cp -R server/scripts dist",
     "start": "node dist/index.js"
   },
   "files": [
