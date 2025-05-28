@@ -1,8 +1,9 @@
+from typing import List, Dict, Any
 import unreal
 import json
 
 
-def get_asset_info(asset_path):
+def get_asset_info(asset_path: str) -> List[Dict[str, Any]]:
     asset = unreal.EditorAssetLibrary.find_asset_data(asset_path)
     if asset.is_valid():
         asset_data = asset.get_asset()

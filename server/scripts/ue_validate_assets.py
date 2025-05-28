@@ -1,8 +1,11 @@
+from typing import Dict, List, Any, Optional, Union
 import unreal
 import json
 
 
-def validate_assets(asset_paths=None):
+def validate_assets(
+    asset_paths: Optional[Union[str, List[str]]] = None,
+) -> Dict[str, Any]:
     validation_results = {
         "total_validated": 0,
         "valid_assets": [],
@@ -83,4 +86,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

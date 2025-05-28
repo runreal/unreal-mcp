@@ -1,8 +1,9 @@
+from typing import Dict, List, Any
 import unreal
 import json
 
 
-def get_project_info():
+def get_project_info() -> Dict[str, Any]:
     project_info = {}
 
     project_info["project_name"] = (

@@ -1,8 +1,11 @@
+from typing import Dict, List, Any, Optional
 import unreal
 import json
 
 
-def search_assets(search_term, asset_class=None):
+def search_assets(
+    search_term: str, asset_class: Optional[str] = None
+) -> Dict[str, Any]:
     asset_registry = unreal.AssetRegistryHelpers.get_asset_registry()
     all_assets = asset_registry.get_all_assets()
 
@@ -53,4 +56,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

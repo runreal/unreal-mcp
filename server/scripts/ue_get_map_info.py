@@ -1,8 +1,9 @@
+from typing import Dict, Any
 import unreal
 import json
 
 
-def get_map_info():
+def get_map_info() -> Dict[str, Any]:
     world = unreal.EditorLevelLibrary.get_editor_world()
     if not world:
         return {"error": "No world loaded"}
@@ -56,4 +57,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

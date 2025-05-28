@@ -1,7 +1,7 @@
 import unreal
 
 
-def execute_console_command(command):
+def execute_console_command(command: str) -> None:
     unreal.SystemLibrary.execute_console_command(None, command)
 
 

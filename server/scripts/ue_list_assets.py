@@ -1,7 +1,8 @@
+from typing import List
 import unreal
 
 
-def list_assets():
+def list_assets() -> List[str]:
     assets = unreal.EditorAssetLibrary.list_assets("/Game", recursive=True)
     return assets
 

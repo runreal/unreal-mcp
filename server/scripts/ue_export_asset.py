@@ -1,9 +1,10 @@
+from typing import bytes
 import unreal
 import sys
 import tempfile
 
 
-def export_asset(asset_path):
+def export_asset(asset_path: str) -> bytes:
     asset = unreal.EditorAssetLibrary.load_asset(asset_path)
 
     if not asset:
