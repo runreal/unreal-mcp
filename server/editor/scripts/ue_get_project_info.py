@@ -1,9 +1,9 @@
-from typing import Dict, List, Any
+from typing import Dict, Any
 import unreal
 import json
 
 
-def get_project_info() -> Dict[str, Any]:
+def get_project_info() -> Dict[str, dict]:
     project_info = {}
 
     project_info["project_name"] = (
@@ -52,7 +52,7 @@ def get_project_info() -> Dict[str, Any]:
             and "b_" in asset_name_lower
         ):
             characters.append(full_path)
-        elif "experience" in asset_name_lower and not "ui" in package_path.lower():
+        elif "experience" in asset_name_lower and "ui" not in package_path.lower():
             experiences.append(full_path)
         elif any(term in asset_name_lower for term in ["weapon", "wid_"]):
             weapons.append(full_path)

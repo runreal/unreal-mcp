@@ -1,4 +1,4 @@
-from typing import List, Dict, str
+from typing import List, Dict
 import unreal
 import json
 

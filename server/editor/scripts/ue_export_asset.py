@@ -1,4 +1,3 @@
-from typing import bytes
 import unreal
 import sys
 import tempfile
