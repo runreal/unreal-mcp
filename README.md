@@ -4,6 +4,12 @@
 
 ![gif](./mcp.gif)
 
+<p align="center">
+  <a href="https://x.com/runreal_dev">Twitter</a>
+  ·
+  <a href="https://discord.gg/6ZhWVU5W47">Discord</a>
+</p>
+
 ## Differences
 
 This server does not require installing a new UE plugin as it uses the built-in Python remote execution protocol.
@@ -12,8 +18,19 @@ Adding new tools/features is much faster to develop since it does not require an
 
 It can support the full [Unreal Engine Python API](https://dev.epicgames.com/documentation/en-us/unreal-engine/python-api)
 
+
+## Note
+
+- This is not an official Unreal Engine project.
+- Your AI agents or tools will have full access to your Editor.
+- Review any changes your Client suggests before you approve them.
+
 ## Installation
 
+#### Requirements
+- Unreal Engine 5.4+ (verified, may work with earlier versions)
+- Node.js with npx
+- MCP Client (Claude, Cursor, etc.)
 
 1. Setting up your Editor:
    - Open your Unreal Engine project
@@ -41,6 +58,10 @@ It can support the full [Unreal Engine Python API](https://dev.epicgames.com/doc
   }
 }
 ```
+
+## Contributing
+
+Please feel free to open issues or pull requests. Contributions are welcome, especially new tools/commands.
 
 
 ### License MIT
