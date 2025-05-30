@@ -1,6 +1,9 @@
 # unreal-mcp
 > MCP server for Unreal Engine that uses Unreal Python Remote Execution
 
+
+![gif](./mcp.gif)
+
 ## Differences
 
 This server does not require installing a new UE plugin as it uses the built-in Python remote execution protocol.
