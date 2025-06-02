@@ -2,14 +2,13 @@ import process from "node:process";
 import { z } from "zod";
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import {
   RemoteExecution,
   RemoteExecutionConfig,
 } from "unreal-remote-execution";
 import * as editorTools from "./editor/tools.js";
 
-const server = new McpServer({
+export const server = new McpServer({
   name: "UnrealMCP",
   description:
     "Unreal Engine mcp - use the documentation resource before using tools. Some tools run in the editor",
@@ -338,24 +337,40 @@ server.tool(
   "editor_create_object",
   "Create a new object/actor in the world",
   {
-    object_class: z.string().describe("Unreal class name (e.g., 'StaticMeshActor', 'DirectionalLight')"),
+    object_class: z
+      .string()
+      .describe(
+        "Unreal class name (e.g., 'StaticMeshActor', 'DirectionalLight')",
+      ),
     object_name: z.string().describe("Name/label for the created object"),
-    location: z.object({
-      x: z.number().default(0),
-      y: z.number().default(0),
-      z: z.number().default(0),
-    }).optional().describe("World position coordinates"),
-    rotation: z.object({
-      pitch: z.number().default(0),
-      yaw: z.number().default(0),
-      roll: z.number().default(0),
-    }).optional().describe("Rotation in degrees"),
-    scale: z.object({
-      x: z.number().default(1),
-      y: z.number().default(1),
-      z: z.number().default(1),
-    }).optional().describe("Scale multipliers"),
-    properties: z.record(z.any()).optional().describe("Additional actor properties"),
+    location: z
+      .object({
+        x: z.number().default(0),
+        y: z.number().default(0),
+        z: z.number().default(0),
+      })
+      .optional()
+      .describe("World position coordinates"),
+    rotation: z
+      .object({
+        pitch: z.number().default(0),
+        yaw: z.number().default(0),
+        roll: z.number().default(0),
+      })
+      .optional()
+      .describe("Rotation in degrees"),
+    scale: z
+      .object({
+        x: z.number().default(1),
+        y: z.number().default(1),
+        z: z.number().default(1),
+      })
+      .optional()
+      .describe("Scale multipliers"),
+    properties: z
+      .record(z.any())
+      .optional()
+      .describe("Additional actor properties"),
   },
   async ({
     object_class,
@@ -391,22 +406,34 @@ server.tool(
   "Update an existing object/actor in the world",
   {
     actor_name: z.string().describe("Name or label of the actor to update"),
-    location: z.object({
-      x: z.number(),
-      y: z.number(),
-      z: z.number(),
-    }).optional().describe("New world position coordinates"),
-    rotation: z.object({
-      pitch: z.number(),
-      yaw: z.number(),
-      roll: z.number(),
-    }).optional().describe("New rotation in degrees"),
-    scale: z.object({
-      x: z.number(),
-      y: z.number(),
-      z: z.number(),
-    }).optional().describe("New scale multipliers"),
-    properties: z.record(z.any()).optional().describe("Additional actor properties to update"),
+    location: z
+      .object({
+        x: z.number(),
+        y: z.number(),
+        z: z.number(),
+      })
+      .optional()
+      .describe("New world position coordinates"),
+    rotation: z
+      .object({
+        pitch: z.number(),
+        yaw: z.number(),
+        roll: z.number(),
+      })
+      .optional()
+      .describe("New rotation in degrees"),
+    scale: z
+      .object({
+        x: z.number(),
+        y: z.number(),
+        z: z.number(),
+      })
+      .optional()
+      .describe("New scale multipliers"),
+    properties: z
+      .record(z.any())
+      .optional()
+      .describe("Additional actor properties to update"),
     new_name: z.string().optional().describe("New name/label for the actor"),
   },
   async ({ actor_name, location, rotation, scale, properties, new_name }) => {
@@ -460,6 +487,3 @@ server.resource("docs", "docs://unreal_python", async () => {
     ],
   };
 });
-
-const transport = new StdioServerTransport();
-await server.connect(transport);

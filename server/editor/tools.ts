@@ -1,10 +1,6 @@
 import fs from "node:fs";
-import path, { dirname } from "node:path";
-import { fileURLToPath } from "node:url";
+import path from "node:path";
 import { Template } from "../utils.js";
-
-export const __filename = fileURLToPath(import.meta.url);
-export const __dirname = dirname(__filename);
 
 export function read(filePath: string): string {
   return fs.readFileSync(path.join(__dirname, filePath), "utf8");
