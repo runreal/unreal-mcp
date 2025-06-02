@@ -1,9 +1,9 @@
 # unreal-mcp
 > MCP server for Unreal Engine that uses Unreal Python Remote Execution
 
-![hero](./hero.png)
+![hero](https://github.com/runreal/unreal-mcp/raw/refs/heads/main/hero.png)
 
-![gif](./mcp.gif)
+![gif](https://github.com/runreal/unreal-mcp/raw/refs/heads/main/mcp.gif)
 
 <p align="center">
   <a href="https://x.com/runreal_dev">Twitter</a>
@@ -45,8 +45,8 @@ It can support the full [Unreal Engine Python API](https://dev.epicgames.com/doc
    - Go to `Edit` -> `Project Settings` 
    - Search for "Python" and enable the "Enable Remote Execution" option
 
-  ![enable plugin](./img1.png)
-  ![enable remote execution](./img2.png)
+  ![enable plugin](https://github.com/runreal/unreal-mcp/raw/refs/heads/main/img1.png)
+  ![enable remote execution](https://github.com/runreal/unreal-mcp/raw/refs/heads/main/img2.png)
 
 2. Set up your Client:
    - Edit your Claude (or Cursor) config
