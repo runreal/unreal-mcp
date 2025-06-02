@@ -1,6 +1,7 @@
 # unreal-mcp
 > MCP server for Unreal Engine that uses Unreal Python Remote Execution
 
+![hero](./hero.png)
 
 ![gif](./mcp.gif)
 
@@ -9,6 +10,10 @@
   ·
   <a href="https://discord.gg/6ZhWVU5W47">Discord</a>
 </p>
+
+<div align="center">
+  <a href="LICENSE"><img alt="license" src="https://img.shields.io/badge/LICENSE-MIT-GREEN?style=flat-square"></a>
+</div>
 
 ## Differences
 

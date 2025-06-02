@@ -43,3 +43,44 @@ export const UEValidateAssets = (asset_paths?: string) =>
   Template(read("./scripts/ue_validate_assets.py"), {
     asset_paths: asset_paths || "",
   });
+
+export const UECreateObject = (
+  object_class: string,
+  object_name: string,
+  location?: { x: number; y: number; z: number },
+  rotation?: { pitch: number; yaw: number; roll: number },
+  scale?: { x: number; y: number; z: number },
+  properties?: Record<string, any>,
+) => {
+  return Template(read("./scripts/ue_create_object.py"), {
+    object_class,
+    object_name,
+    location: location ? JSON.stringify(location) : "null",
+    rotation: rotation ? JSON.stringify(rotation) : "null",
+    scale: scale ? JSON.stringify(scale) : "null",
+    properties: properties ? JSON.stringify(properties) : "null",
+  });
+};
+
+export const UEUpdateObject = (
+  actor_name: string,
+  location?: { x: number; y: number; z: number },
+  rotation?: { pitch: number; yaw: number; roll: number },
+  scale?: { x: number; y: number; z: number },
+  properties?: Record<string, any>,
+  new_name?: string,
+) => {
+  return Template(read("./scripts/ue_update_object.py"), {
+    actor_name,
+    location: location ? JSON.stringify(location) : "null",
+    rotation: rotation ? JSON.stringify(rotation) : "null",
+    scale: scale ? JSON.stringify(scale) : "null",
+    properties: properties ? JSON.stringify(properties) : "null",
+    new_name: new_name || "null",
+  });
+};
+
+export const UEDeleteObject = (actor_names: string) =>
+  Template(read("./scripts/ue_delete_object.py"), {
+    actor_names,
+  });

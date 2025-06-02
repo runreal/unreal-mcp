@@ -4,7 +4,7 @@ import json
 
 
 def get_map_info() -> Dict[str, Any]:
-    world = unreal.EditorLevelLibrary.get_editor_world()
+    world = unreal.get_editor_subsystem(unreal.UnrealEditorSubsystem).get_editor_world()
     if not world:
         return {"error": "No world loaded"}
 
@@ -12,7 +12,9 @@ def get_map_info() -> Dict[str, Any]:
     map_info["map_name"] = world.get_name()
     map_info["map_path"] = world.get_path_name()
 
-    all_actors = unreal.EditorLevelLibrary.get_all_level_actors()
+    all_actors = unreal.get_editor_subsystem(
+        unreal.EditorActorSubsystem
+    ).get_all_level_actors()
     map_info["total_actors"] = len(all_actors)
 
     actor_types = {}
@@ -41,11 +43,17 @@ def get_map_info() -> Dict[str, Any]:
 
     map_info["lighting"] = lighting_info
 
-    streaming_levels = world.get_streaming_levels()
-    map_info["streaming_levels"] = len(streaming_levels)
-    map_info["streaming_level_names"] = [
-        level.get_world_asset().get_name() for level in streaming_levels
-    ]
+    try:
+        streaming_levels = unreal.EditorLevelLibrary.get_all_level_actors_of_class(
+            unreal.LevelStreamingDynamic
+        )
+        map_info["streaming_levels"] = len(streaming_levels)
+        map_info["streaming_level_names"] = [
+            level.get_name() for level in streaming_levels
+        ]
+    except Exception:
+        map_info["streaming_levels"] = 0
+        map_info["streaming_level_names"] = []
 
     return map_info
 

@@ -4,12 +4,14 @@ import json
 
 
 def get_world_outliner() -> Dict[str, Any]:
-    world = unreal.EditorLevelLibrary.get_editor_world()
+    world = unreal.get_editor_subsystem(unreal.UnrealEditorSubsystem).get_editor_world()
     if not world:
         return {"error": "No world loaded"}
 
     # Get all actors in the current level
-    all_actors = unreal.EditorLevelLibrary.get_all_level_actors()
+    all_actors = unreal.get_editor_subsystem(
+        unreal.EditorActorSubsystem
+    ).get_all_level_actors()
 
     outliner_data = {
         "world_name": world.get_name(),
