@@ -143,7 +143,7 @@ server.tool(
 /// Editor
 server.tool(
   "editor_run_python",
-  "Execute any python within the Unreal Editor. All python must have `import unreal` at the top. CHECK THE UNREAL PYTHON DOCUMENTATION BEFORE USING THIS TOOL.",
+  "Execute any python within the Unreal Editor. All python must have `import unreal` at the top. CHECK THE UNREAL PYTHON DOCUMENTATION BEFORE USING THIS TOOL. NEVER EVER ADD COMMENTS",
   { code: z.string() },
   async ({ code }) => {
     const result = await tryRunCommand(code);
@@ -154,21 +154,25 @@ server.tool(
   },
 );
 
-server.tool("editor_list_assets", "List all Unreal assets", async () => {
-  const result = await tryRunCommand(editorTools.UEListAssets());
-  return {
-    content: [
-      {
-        type: "text",
-        text: result,
-      },
-    ],
-  };
-});
+server.tool(
+  "editor_list_assets",
+  "List all Unreal assets\n\nExample output: [''/Game/Characters/Hero/BP_Hero'', ''/Game/Maps/TestMap'', ''/Game/Materials/M_Basic'']\n\nReturns a Python list of asset paths.",
+  async () => {
+    const result = await tryRunCommand(editorTools.UEListAssets());
+    return {
+      content: [
+        {
+          type: "text",
+          text: result,
+        },
+      ],
+    };
+  },
+);
 
 server.tool(
   "editor_export_asset",
-  "Export an Unreal asset to text",
+  "Export an Unreal asset to text\n\nExample output: Binary data of the exported asset file\n\nReturns the raw binary content of the exported asset.",
   {
     asset_path: z.string(),
   },
@@ -187,7 +191,7 @@ server.tool(
 
 server.tool(
   "editor_get_asset_info",
-  "Get information about an asset",
+  "Get information about an asset, including LOD levels for StaticMesh and SkeletalMesh assets\n\nExample output: [{'name': 'SM_Cube', 'is_valid': True, 'is_u_asset': True, 'is_asset_loaded': True, 'class': 'StaticMesh', 'path': '/Game/Meshes/SM_Cube', 'package': 'SM_Cube', 'package_path': '/Game/Meshes/SM_Cube', 'lod_levels': [{'lod_index': 0, 'num_vertices': 24, 'num_triangles': 12}, {'lod_index': 1, 'num_vertices': 16, 'num_triangles': 8}]}]\n\nReturns asset metadata with LOD information for mesh assets.",
   { asset_path: z.string() },
   async ({ asset_path }) => {
     const result = await tryRunCommand(editorTools.UEGetAssetInfo(asset_path));
@@ -204,7 +208,7 @@ server.tool(
 
 server.tool(
   "editor_get_asset_references",
-  "Get references for an asset",
+  "Get references for an asset\n\nExample output: [{'name': '/Game/Materials/M_Character.M_Character', 'class': 'Material'}, {'name': '/Game/Blueprints/BP_Player.BP_Player', 'class': 'Blueprint'}]\n\nReturns list of assets that reference the specified asset.",
   { asset_path: z.string() },
   async ({ asset_path }) => {
     const result = await tryRunCommand(
@@ -224,7 +228,7 @@ server.tool(
 
 server.tool(
   "editor_console_command",
-  "Run a console command in Unreal",
+  "Run a console command in Unreal\n\nExample output: (No output for most commands, executed silently)\n\nExecutes the console command without returning output.",
   { command: z.string() },
   async ({ command }) => {
     const result = await tryRunCommand(editorTools.UEConsoleCommand(command));
@@ -241,7 +245,7 @@ server.tool(
 
 server.tool(
   "editor_project_info",
-  "Get detailed information about the current project",
+  "Get detailed information about the current project\n\nExample output: {'project_name': 'MyGame', 'project_directory': '/Users/dev/MyGame/', 'engine_version': '5.3.0', 'total_assets': 1250, 'asset_locations': {'Game': 800, 'Engine': 450}, 'enhanced_input_enabled': true, 'input_actions': ['/Game/Input/IA_Move'], 'game_modes': ['/Game/Core/GM_Main'], 'characters': ['/Game/Characters/B_Hero'], 'maps': ['/Game/Maps/L_TestMap']}\n\nReturns comprehensive project metadata and asset counts.",
   {},
   async () => {
     const result = await tryRunCommand(editorTools.UEGetProjectInfo());
@@ -258,7 +262,7 @@ server.tool(
 
 server.tool(
   "editor_get_map_info",
-  "Get detailed information about the current map/level",
+  "Get detailed information about the current map/level\n\nExample output: {'map_name': 'TestMap', 'map_path': '/Game/Maps/TestMap', 'total_actors': 45, 'actor_types': {'StaticMeshActor': 20, 'DirectionalLight': 1, 'PlayerStart': 1}, 'lighting': {'has_lightmass_importance_volume': false, 'directional_lights': 1, 'point_lights': 3, 'spot_lights': 0}, 'streaming_levels': 0, 'streaming_level_names': []}\n\nReturns current level information with actor counts and lighting details.",
   {},
   async () => {
     const result = await tryRunCommand(editorTools.UEGetMapInfo());
@@ -275,7 +279,7 @@ server.tool(
 
 server.tool(
   "editor_search_assets",
-  "Search for assets by name or path with optional class filter",
+  "Search for assets by name or path with optional class filter\n\nExample output: {'search_term': 'character', 'asset_class_filter': 'Blueprint', 'total_matches': 3, 'assets': [{'name': 'BP_Character', 'path': '/Game/Characters', 'class': 'Blueprint', 'package_name': 'BP_Character'}, {'name': 'BP_EnemyCharacter', 'path': '/Game/Enemies', 'class': 'Blueprint', 'package_name': 'BP_EnemyCharacter'}]}\n\nReturns search results with asset details, limited to 50 results.",
   {
     search_term: z.string(),
     asset_class: z.string().optional(),
@@ -297,7 +301,7 @@ server.tool(
 
 server.tool(
   "editor_get_world_outliner",
-  "Get all actors in the current world with their properties",
+  "Get all actors in the current world with their properties\n\nExample output: {'world_name': 'TestMap', 'total_actors': 45, 'actors': [{'name': 'StaticMeshActor_0', 'class': 'StaticMeshActor', 'location': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'rotation': {'pitch': 0.0, 'yaw': 0.0, 'roll': 0.0}, 'scale': {'x': 1.0, 'y': 1.0, 'z': 1.0}, 'is_hidden': false, 'folder_path': '/Meshes', 'components': ['StaticMeshComponent', 'SceneComponent']}]}\n\nReturns complete world outliner with all actors and their transform data.",
   {},
   async () => {
     const result = await tryRunCommand(editorTools.UEGetWorldOutliner());
@@ -314,7 +318,7 @@ server.tool(
 
 server.tool(
   "editor_validate_assets",
-  "Validate assets in the project to check for errors",
+  "Validate assets in the project to check for errors\n\nExample output: {'total_validated': 100, 'valid_assets': [{'path': '/Game/Meshes/SM_Cube', 'class': 'StaticMesh', 'size': '1024'}], 'invalid_assets': [{'path': '/Game/Missing/Asset', 'error': 'Asset does not exist'}], 'validation_summary': {'valid_count': 95, 'invalid_count': 5, 'success_rate': 95.0}}\n\nReturns validation results with asset status and error details.",
   {
     asset_paths: z.string().optional(),
   },
@@ -335,7 +339,7 @@ server.tool(
 
 server.tool(
   "editor_create_object",
-  "Create a new object/actor in the world",
+  "Create a new object/actor in the world\n\nExample output: {'success': true, 'actor_name': 'StaticMeshActor_1', 'actor_label': 'MyCube', 'class': 'StaticMeshActor', 'location': {'x': 100.0, 'y': 200.0, 'z': 0.0}, 'rotation': {'pitch': 0.0, 'yaw': 45.0, 'roll': 0.0}, 'scale': {'x': 1.0, 'y': 1.0, 'z': 1.0}}\n\nReturns created actor details with final transform values.",
   {
     object_class: z
       .string()
@@ -405,7 +409,7 @@ server.tool(
 
 server.tool(
   "editor_update_object",
-  "Update an existing object/actor in the world",
+  "Update an existing object/actor in the world\n\nExample output: {'success': true, 'actor_name': 'StaticMeshActor_1', 'actor_label': 'UpdatedCube', 'class': 'StaticMeshActor', 'location': {'x': 150.0, 'y': 200.0, 'z': 50.0}, 'rotation': {'pitch': 0.0, 'yaw': 90.0, 'roll': 0.0}, 'scale': {'x': 2.0, 'y': 2.0, 'z': 2.0}}\n\nReturns updated actor details with new transform values.",
   {
     actor_name: z.string().describe("Name or label of the actor to update"),
     location: z
@@ -464,7 +468,7 @@ server.tool(
 
 server.tool(
   "editor_delete_object",
-  "Delete an object/actor from the world",
+  "Delete an object/actor from the world\n\nExample output: {'success': true, 'message': 'Successfully deleted actor: MyCube', 'deleted_actor': {'actor_name': 'StaticMeshActor_1', 'actor_label': 'MyCube', 'class': 'StaticMeshActor', 'location': {'x': 100.0, 'y': 200.0, 'z': 0.0}}}\n\nReturns deletion confirmation with details of the deleted actor.",
   {
     actor_names: z.string(),
   },

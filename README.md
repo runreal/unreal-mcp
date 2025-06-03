@@ -59,7 +59,7 @@ It can support the full [Unreal Engine Python API](https://dev.epicgames.com/doc
         "-y",
         "@runreal/unreal-mcp",
       ]
-    },
+    }
   }
 }
 ```
