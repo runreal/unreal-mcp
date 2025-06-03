@@ -43,7 +43,7 @@ remoteExecution.getFirstRemoteNode(1000, 5000).then(
     // Close down the servers & connections once we are done
   },
   () => {
-    console.log("No remote nodes found!");
+    console.log("Unable to connect to your Unreal Engine Editor");
     remoteExecution.stop();
     process.exit(1);
   },
