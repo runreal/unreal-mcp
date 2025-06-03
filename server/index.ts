@@ -370,7 +370,9 @@ server.tool(
     properties: z
       .record(z.any())
       .optional()
-      .describe("Additional actor properties"),
+      .describe(
+        'Additional actor properties. For StaticMeshActor: use \'StaticMesh\' for mesh path, \'Material\' for single material path, or \'Materials\' for array of material paths. Example: {"StaticMesh": "/Game/Meshes/Cube", "Material": "/Game/Materials/M_Basic"}',
+      ),
   },
   async ({
     object_class,
@@ -433,7 +435,9 @@ server.tool(
     properties: z
       .record(z.any())
       .optional()
-      .describe("Additional actor properties to update"),
+      .describe(
+        'Additional actor properties to update. For StaticMeshActor: use \'StaticMesh\' for mesh path, \'Material\' for single material path, or \'Materials\' for array of material paths. Example: {"StaticMesh": "/Game/Meshes/Cube", "Material": "/Game/Materials/M_Basic"}',
+      ),
     new_name: z.string().optional().describe("New name/label for the actor"),
   },
   async ({ actor_name, location, rotation, scale, properties, new_name }) => {

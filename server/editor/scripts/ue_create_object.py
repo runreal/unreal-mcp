@@ -91,6 +91,33 @@ def create_object(
 
         actor.set_actor_scale3d(spawn_scale)
 
+        # Apply default mesh and material for StaticMeshActor if no properties provided
+        if actor.get_class().get_name() == "StaticMeshActor" and not properties:
+            mesh_component = actor.get_component_by_class(unreal.StaticMeshComponent)
+            if mesh_component:
+                name_lower = object_name.lower()
+                mesh_path = "/Engine/BasicShapes/Cube"  # Default fallback
+
+                if "sphere" in name_lower or "ball" in name_lower:
+                    mesh_path = "/Engine/BasicShapes/Sphere"
+                elif "cylinder" in name_lower:
+                    mesh_path = "/Engine/BasicShapes/Cylinder"
+                elif "cone" in name_lower:
+                    mesh_path = "/Engine/BasicShapes/Cone"
+                elif "plane" in name_lower:
+                    mesh_path = "/Engine/BasicShapes/Plane"
+
+                mesh = unreal.EditorAssetLibrary.load_asset(mesh_path)
+                if mesh:
+                    mesh_component.set_static_mesh(mesh)
+
+                # Apply default material
+                default_material = unreal.EditorAssetLibrary.load_asset(
+                    "/Engine/BasicShapes/BasicShapeMaterial"
+                )
+                if default_material:
+                    mesh_component.set_material(0, default_material)
+
         if properties:
             for prop_name, prop_value in properties.items():
                 try:
@@ -105,6 +132,33 @@ def create_object(
                             )
                             if mesh_component:
                                 mesh_component.set_static_mesh(static_mesh)
+                    elif (
+                        prop_name == "Material"
+                        and actor.get_class().get_name() == "StaticMeshActor"
+                    ):
+                        material = unreal.EditorAssetLibrary.load_asset(prop_value)
+                        if material:
+                            mesh_component = actor.get_component_by_class(
+                                unreal.StaticMeshComponent
+                            )
+                            if mesh_component:
+                                mesh_component.set_material(0, material)
+                    elif (
+                        prop_name == "Materials"
+                        and actor.get_class().get_name() == "StaticMeshActor"
+                        and isinstance(prop_value, list)
+                    ):
+                        mesh_component = actor.get_component_by_class(
+                            unreal.StaticMeshComponent
+                        )
+                        if mesh_component:
+                            for i, material_path in enumerate(prop_value):
+                                if material_path:
+                                    material = unreal.EditorAssetLibrary.load_asset(
+                                        material_path
+                                    )
+                                    if material:
+                                        mesh_component.set_material(i, material)
                     elif hasattr(actor, prop_name):
                         setattr(actor, prop_name, prop_value)
                 except Exception as e:
