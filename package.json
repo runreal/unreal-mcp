@@ -10,7 +10,7 @@
     "dev": "tsx --watch server/bin.ts",
     "build": "tsc --build && mkdir -p dist/editor && cp -R server/editor/scripts dist/editor",
     "start": "node dist/bin.js",
-    "postbuild": "node dist/scripts/make-executable.js",
+    "postbuild": "node dist/scripts/make-executable.js && node dist/scripts/update-readme.js",
     "fmt": "pnpm biome format . --write && pnpm biome check --formatter-enabled=false --linter-enabled=false --organize-imports-enabled=true --write"
   },
   "files": ["dist"],

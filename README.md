@@ -64,6 +64,30 @@ It can support the full [Unreal Engine Python API](https://dev.epicgames.com/doc
 }
 ```
 
+## Available Tools
+
+| Tool | Description |
+|------|-------------|
+| `set_unreal_engine_path` | Set the Unreal Engine path |
+| `set_unreal_project_path` | Set the Project path |
+| `get_unreal_engine_path` | Get the current Unreal Engine path |
+| `get_unreal_project_path` | Get the current Unreal Project path |
+| `editor_run_python` | Execute any python within the Unreal Editor |
+| `editor_list_assets` | List all Unreal assets |
+| `editor_export_asset` | Export an Unreal asset to text |
+| `editor_get_asset_info` | Get information about an asset, including LOD levels for StaticMesh and SkeletalMesh assets |
+| `editor_get_asset_references` | Get references for an asset |
+| `editor_console_command` | Run a console command in Unreal |
+| `editor_project_info` | Get detailed information about the current project |
+| `editor_get_map_info` | Get detailed information about the current map/level |
+| `editor_search_assets` | Search for assets by name or path with optional class filter |
+| `editor_get_world_outliner` | Get all actors in the current world with their properties |
+| `editor_validate_assets` | Validate assets in the project to check for errors |
+| `editor_create_object` | Create a new object/actor in the world |
+| `editor_update_object` | Update an existing object/actor in the world |
+| `editor_delete_object` | Delete an object/actor from the world |
+| `editor_take_screenshot` | Take a screenshot of the Unreal Editor |
+
 ## Contributing
 
 Please feel free to open issues or pull requests. Contributions are welcome, especially new tools/commands.
