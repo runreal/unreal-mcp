@@ -57,7 +57,7 @@ It can support the full [Unreal Engine Python API](https://dev.epicgames.com/doc
       "command": "npx",
       "args": [
         "-y",
-        "@runreal/unreal-mcp",
+        "@runreal/unreal-mcp"
       ]
     }
   }
@@ -87,6 +87,7 @@ It can support the full [Unreal Engine Python API](https://dev.epicgames.com/doc
 | `editor_update_object` | Update an existing object/actor in the world |
 | `editor_delete_object` | Delete an object/actor from the world |
 | `editor_take_screenshot` | Take a screenshot of the Unreal Editor |
+| `editor_move_camera` | Move the viewport camera to a specific location and rotation for positioning screenshots |
 
 ## Contributing
 

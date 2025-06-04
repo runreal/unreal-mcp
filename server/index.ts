@@ -492,6 +492,38 @@ server.tool(
 	},
 )
 
+server.tool(
+	"editor_move_camera",
+	"Move the viewport camera to a specific location and rotation for positioning screenshots",
+	{
+		location: z
+			.object({
+				x: z.number(),
+				y: z.number(),
+				z: z.number(),
+			})
+			.describe("Camera world position coordinates"),
+		rotation: z
+			.object({
+				pitch: z.number(),
+				yaw: z.number(),
+				roll: z.number(),
+			})
+			.describe("Camera rotation in degrees"),
+	},
+	async ({ location, rotation }) => {
+		const result = await tryRunCommand(editorTools.UEMoveCamera(location, rotation))
+		return {
+			content: [
+				{
+					type: "text",
+					text: result,
+				},
+			],
+		}
+	},
+)
+
 server.resource("docs", "docs://unreal_python", async () => {
 	return {
 		contents: [

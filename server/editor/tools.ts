@@ -76,3 +76,13 @@ export const UEDeleteObject = (actor_names: string) =>
 	})
 
 export const UETakeScreenshot = () => Template(read("./scripts/ue_take_screenshot.py"))
+
+export const UEMoveCamera = (
+	location: { x: number; y: number; z: number },
+	rotation: { pitch: number; yaw: number; roll: number },
+) => {
+	return Template(read("./scripts/ue_move_camera.py"), {
+		location: JSON.stringify(location),
+		rotation: JSON.stringify(rotation),
+	})
+}
