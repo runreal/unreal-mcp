@@ -1,6 +1,6 @@
 {
   "name": "@runreal/unreal-mcp",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "MCP server for Unreal Engine using Unreal Python Remote Execution",
   "main": "dist/index.js",
   "bin": {
