@@ -534,3 +534,14 @@ server.resource("docs", "docs://unreal_python", async () => {
 		],
 	}
 })
+
+server.resource("python_api_stub", "docs://python_api_stub", async () => {
+	return {
+		contents: [
+			{
+				uri: "https://raw.githubusercontent.com/DocDooom/unreal-stub/refs/heads/main/unreal/unreal.py",
+				text: "Unreal Engine Python API Stub",
+			},
+		],
+	}
+})
