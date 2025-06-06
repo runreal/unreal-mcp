@@ -15,7 +15,7 @@
   <a href="LICENSE"><img alt="license" src="https://img.shields.io/badge/LICENSE-MIT-GREEN?style=flat-square"></a>
 </div>
 
-## Differences
+## ⚡ Differences
 
 This server does not require installing a new UE plugin as it uses the built-in Python remote execution protocol.
 
@@ -24,18 +24,18 @@ Adding new tools/features is much faster to develop since it does not require an
 It can support the full [Unreal Engine Python API](https://dev.epicgames.com/documentation/en-us/unreal-engine/python-api)
 
 
-## Note
+## ⚠️ Note
 
 - This is not an official Unreal Engine project.
 - Your AI agents or tools will have full access to your Editor.
 - Review any changes your Client suggests before you approve them.
 
-## Installation
+## 📦 Installation
 
-#### Requirements
-- Unreal Engine 5.4+ (verified, may work with earlier versions)
-- Node.js with npx
-- MCP Client (Claude, Cursor, etc.)
+#### 📋 Requirements
+- 🔧 Unreal Engine 5.4+ (verified, may work with earlier versions)
+- 🟢 Node.js with npx
+- 🤖 MCP Client (Claude, Cursor, etc.)
 
 1. Setting up your Editor:
    - Open your Unreal Engine project
@@ -64,7 +64,7 @@ It can support the full [Unreal Engine Python API](https://dev.epicgames.com/doc
 }
 ```
 
-### Troubleshooting
+### 🔧 Troubleshooting
 
 If you get an error similar to `MCP Unreal: Unexpected token 'C', Connection...` it means that the mcp-server was not able to connect to the Unreal Editor.
 
@@ -75,7 +75,7 @@ If you get an error similar to `MCP Unreal: Unexpected token 'C', Connection...`
 - Check your running processes and kill any zombie unreal-mcp Node.js processes.
 
 
-## Available Tools
+## 🛠️ Available Tools
 
 | Tool | Description |
 |------|-------------|
@@ -100,7 +100,7 @@ If you get an error similar to `MCP Unreal: Unexpected token 'C', Connection...`
 | `editor_take_screenshot` | Take a screenshot of the Unreal Editor |
 | `editor_move_camera` | Move the viewport camera to a specific location and rotation for positioning screenshots |
 
-## Contributing
+## 🤝 Contributing
 
 Please feel free to open issues or pull requests. Contributions are welcome, especially new tools/commands.
 
