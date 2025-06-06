@@ -64,6 +64,17 @@ It can support the full [Unreal Engine Python API](https://dev.epicgames.com/doc
 }
 ```
 
+### Troubleshooting
+
+If you get an error similar to `MCP Unreal: Unexpected token 'C', Connection...` it means that the mcp-server was not able to connect to the Unreal Editor.
+
+- Make sure that the Python Editor Script Plugin is enabled and that the Remote Execution option is checked in your project settings.
+- Try also changing your bind address from `127.0.0.1` to `0.0.0.0` but note that this will allow connections from your local network.
+- Restart your Unreal Editor fully.
+- Fully close/open your client (Claude, Cursor, etc.) to ensure it reconnects to the MCP server. (`File -> Exit` on windows).
+- Check your running processes and kill any zombie unreal-mcp Node.js processes.
+
+
 ## Available Tools
 
 | Tool | Description |
